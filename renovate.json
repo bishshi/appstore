@@ -1,15 +1,48 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:base"],
-  "gitIgnoredAuthors": [
-    "githubaction@githubaction.com"
-  ],
+  "gitIgnoredAuthors": ["githubaction@githubaction.com"],
   "rebaseWhen": "never",
-  "packageRules": [
+  "prCreation": "immediate",
+
+  "hostRules": [
     {
-      "packageNames": ["docker-compose"],
-      "automerge": true
+      "hostType": "docker",
+      "matchHost": "codeberg.org",
+      "registryUrls": ["https://codeberg.org"]
+    },
+    {
+      "hostType": "docker",
+      "matchHost": "code.forgejo.org",
+      "registryUrls": ["https://code.forgejo.org"]
     }
   ],
-  "prCreation": "immediate"
+
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "enabled": false
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["apps/meting-api/*/docker-compose.yml"],
+      "enabled": false
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["apps/chatnio/*/docker-compose.yml"],
+      "enabled": false
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchFileNames": ["apps/*/*/docker-compose.yml"],
+      "versioning": "semver"
+    },
+    {
+      "matchDatasources": ["docker"],
+      "matchPackageNames": ["ghcr.io/umami-software/umami"],
+      "versionCompatibility": "^(?<compatibility>.*)-(?<version>.*)$",
+      "versioning": "semver"
+    }
+  ]
 }
