@@ -16,7 +16,7 @@ services:
     volumes:
       - "${CONFIG_PATH}:/config"
       - "${DOWNLOAD_PATH}:/Downloads/115download"
-    image: funcman/115pc:latest
+    image: funcman/115pc:version-2.0.8.5.1
     labels:
       createdBy: "Apps"
 
