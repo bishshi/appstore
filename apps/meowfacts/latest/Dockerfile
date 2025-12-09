@@ -1,4 +1,4 @@
-FROM node:22-alpine
+FROM node:24-alpine
 
 # 安装 git，创建工作目录，并克隆代码
 RUN apk update && apk upgrade && \
